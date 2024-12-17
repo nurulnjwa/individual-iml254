@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #FFA2B6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #666;
+        }
+
+        h1, h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 100px;
+            color: #2c3e50;
+            font-family: 'Goudy Stout', serif;
+        }
+
+        .content {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            text-align: center;
+        }
+
+        .slider {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .navigation button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .navigation button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .dots {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .dots span {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dots .active {
+            background-color: #717171;
+        }
+
+        iframe {
+            display: block;
+            margin: 20px auto;
+            border: none;
+        }
+
+        footer {
+            background-color: #E9BEC3;
+            color: #69353D;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Main</a>
+        <a href="friends.html">Friends</a>
+        <a href="family.html">Family</a>
+        <a href="food.html">Food</a>
+        <a href="about me.html">About Me</a>
+        <a href="photos.html">Photos</a>
+        <a href="education.html">Education</a>
+    </div>
+
+    <section>
+        <h1>Capture in Time</h1>
+        <div class="content">
+            <p>Welcome to my Gallery! This is where moments come alive through visuals—my personal highlight reel filled with adventures, cherished memories, and the beautiful randomness of life. Let’s celebrate the journey together!</p>
+        </div>
+
+        <div class="slider">
+            <div class="slides">
+                <img src="image/random10.jpg" alt="Image 5">
+                <img src="image/class1.jpg" alt="Image 6">
+                <img src="image/friends9.jpg" alt="Image 7">
+                <img src="image/parents2.jpg" alt="Image 8">
+                <img src="image/random12.jpg" alt="Image 9">
+                <img src="image/f.jpg" alt="Image 11">
+            </div>
+
+            <div class="navigation">
+                <button id="prev">&#10094;</button>
+                <button id="next">&#10095;</button>
+            </div>
+
+            <div class="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <h2 style="text-align: center;">Video Highlights</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/heryWvLqJiQ" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/PHC6ScCsbGo" allowfullscreen></iframe>
+    </section>
+
+    <footer>
+        <p>Created by Nurul Najwa &copy; 2024</p>
+    </footer>
+
+    <script>
+        const slides = document.querySelector('.slides');
+        const images = document.querySelectorAll('.slides img');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        const dots = document.querySelectorAll('.dot');
+
+        let currentIndex = 0;
+
+        function updateSlider() {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlider();
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlider();
+        }
+
+        nextButton.addEventListener('click', showNext);
+        prevButton.addEventListener('click', showPrev);
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+            });
+        });
+    </script>
+</body>
+</html>
